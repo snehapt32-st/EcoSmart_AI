@@ -1,0 +1,2029 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EcoSmart AI – Climate Action Web App</title>
+  <!-- Google Fonts for beautiful typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Geometric Balance Design System Variables */
+    :root {
+      --primary: #059669;         /* Emerald 600 */
+      --primary-hover: #047857;   /* Emerald 700 */
+      --primary-light: #ecfdf5;   /* Emerald 50 / background highlights */
+      --primary-dark: #064e3b;    /* Emerald 900 */
+      --accent: #0f766e;          /* Teal 700 */
+      --accent-hover: #115e59;    /* Teal 800 */
+      --accent-light: #f0fdfa;    /* Teal 50 */
+      --dark: #1e293b;            /* Slate 800 */
+      --light: #f8faf9;           /* Pure Geometric Balance Soft Background */
+      --white: #ffffff;
+      --gray-light: #f1f5f9;      /* Slate 100 border/input background */
+      --gray-medium: #cbd5e1;     /* Slate 300 divider/placeholder */
+      --gray-dark: #475569;       /* Slate 600 body text */
+      --slate-accent: #0f172a;    /* Slate 900 headings */
+      --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-display: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      /* Pure geometric proportions */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -2px rgba(0, 0, 0, 0.03);
+      --shadow-lg: 0 4px 20px rgba(0, 0, 0, 0.03); /* Clean Geometric shadow */
+      --shadow-xl: 0 20px 25px -5px rgba(5, 150, 105, 0.05);
+      --border-radius: 0.75rem;   /* Precise technical corner rounded-xl */
+      --border-radius-lg: 1rem;   /* Card corners rounded-2xl */
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font-sans);
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Core container */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Navigation Bar - Refined */
+    header {
+      background-color: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e1f5ec;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+      transition: all 0.3s ease;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 4.5rem;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-box {
+      width: 2.25rem;
+      height: 2.25rem;
+      background-color: var(--primary);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-size: 1.25rem;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.2);
+    }
+
+    .logo-text-wrapper {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--slate-accent);
+      line-height: 1.1;
+      letter-spacing: -0.01em;
+    }
+
+    .logo-subtext {
+      font-size: 0.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--gray-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.2s ease;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+      background-color: var(--primary-light);
+    }
+
+    .nav-links a.active {
+      color: var(--primary);
+      border-bottom: 2px solid var(--primary);
+      border-radius: 0;
+    }
+
+    /* Premium Technical Status indicator */
+    .header-status {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: var(--primary-light);
+      padding: 0.35rem 0.75rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(5, 150, 105, 0.1);
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      animation: pulse 2.5s infinite;
+    }
+
+    .status-text {
+      font-size: 0.65rem;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--primary-hover);
+      letter-spacing: 0.05em;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+      color: var(--dark);
+    }
+
+    /* Sections Shared Styles */
+    section {
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    /* Custom visual section dividers */
+    .section-divider {
+      position: relative;
+      height: 1px;
+      background: linear-gradient(to right, transparent, rgba(5, 150, 105, 0.15), transparent);
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-badge {
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      font-family: var(--font-display);
+      border: 1px solid rgba(5, 150, 105, 0.15);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--slate-accent);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .section-subtitle {
+      color: var(--gray-dark);
+      margin-top: 0.75rem;
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    /* Hero / Home Section - Geometric Balance */
+    #home-section {
+      background: radial-gradient(circle at 85% 15%, rgba(5, 150, 105, 0.04) 0%, transparent 60%),
+                  radial-gradient(circle at 15% 85%, rgba(15, 118, 110, 0.04) 0%, transparent 60%);
+      padding: 6rem 0 5rem;
+      overflow: hidden;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-family: var(--font-display);
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.15;
+      color: var(--slate-accent);
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.03em;
+    }
+
+    .hero-content h1 span {
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: var(--gray-dark);
+      margin-bottom: 2rem;
+      max-width: 540px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.75rem;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(5, 150, 105, 0.2);
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(5, 150, 105, 0.3);
+    }
+
+    .btn-secondary {
+      background-color: var(--white);
+      border: 1px solid rgba(5, 150, 105, 0.15);
+      color: var(--slate-accent);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-light);
+      transform: translateY(-2px);
+    }
+
+    .hero-illustration {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-blob {
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      background: linear-gradient(135deg, rgba(5, 150, 105, 0.1), rgba(15, 118, 110, 0.1));
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      filter: blur(35px);
+      z-index: 1;
+      animation: morphing-blob 10s infinite alternate;
+    }
+
+    .hero-card-container {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 380px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      border-radius: var(--border-radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .hero-emoji-icon {
+      font-size: 3.5rem;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .hero-card-stat {
+      background-color: var(--primary-light);
+      border-radius: var(--border-radius);
+      padding: 1rem;
+      border: 1px dashed rgba(5, 150, 105, 0.25);
+    }
+
+    .hero-card-stat h4 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      color: var(--primary-hover);
+      font-weight: 700;
+    }
+
+    .hero-card-stat p {
+      font-size: 0.8rem;
+      color: var(--slate-accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Keyframe Animations */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes morphing-blob {
+      0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+      50% { border-radius: 50% 50% 30% 70% / 50% 60% 40% 50%; }
+      100% { border-radius: 60% 40% 60% 40% / 40% 50% 50% 60%; }
+    }
+
+    @keyframes spin-slow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* AI Eco Tips Section */
+    #tips-section {
+      background-color: var(--white);
+    }
+
+    .tips-layout {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .tips-control {
+      width: 100%;
+      text-align: center;
+      background: var(--light);
+      padding: 2.5rem;
+      border-radius: var(--border-radius-lg);
+      border: 1px solid rgba(5, 150, 105, 0.15);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .tips-prompt-text {
+      font-size: 1.05rem;
+      color: var(--gray-dark);
+      margin-bottom: 1.5rem;
+    }
+
+    .tips-btn {
+      min-width: 200px;
+    }
+
+    .tips-results {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-height: 250px;
+    }
+
+    .tips-placeholder-card {
+      background: var(--light);
+      border: 2px dashed rgba(5, 150, 105, 0.15);
+      border-radius: var(--border-radius-lg);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--gray-dark);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--primary-light);
+      border-top-color: var(--primary);
+      border-radius: 50%;
+      animation: spin-slow 0.8s linear infinite;
+      display: none;
+    }
+
+    .tip-card {
+      background-color: var(--white);
+      border: 1px solid rgba(5, 150, 105, 0.1);
+      border-left: 5px solid var(--primary);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.25rem;
+      align-items: flex-start;
+      transform: translateY(15px);
+      opacity: 0;
+      animation: slide-in-up 0.4s ease forwards;
+    }
+
+    .tip-card:hover {
+      border-color: rgba(5, 150, 105, 0.2);
+    }
+
+    .tip-card:nth-child(1) { animation-delay: 0.05s; }
+    .tip-card:nth-child(2) { animation-delay: 0.15s; }
+    .tip-card:nth-child(3) { animation-delay: 0.25s; }
+    .tip-card:nth-child(4) { animation-delay: 0.35s; }
+
+    @keyframes slide-in-up {
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .tip-icon {
+      font-size: 1.5rem;
+      background-color: var(--primary-light);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.5rem;
+    }
+
+    .tip-category {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--primary);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.25rem;
+      display: inline-block;
+      font-family: var(--font-display);
+    }
+
+    .tip-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--slate-accent);
+      margin-bottom: 0.35rem;
+    }
+
+    .tip-desc {
+      color: var(--gray-dark);
+      font-size: 0.9rem;
+    }
+
+    /* Calculator Section */
+    #calculator-section {
+      background-color: var(--light);
+    }
+
+    .calculator-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3rem;
+      align-items: stretch;
+    }
+
+    .calc-card {
+      background: var(--white);
+      border-radius: var(--border-radius-lg);
+      padding: 2.5rem;
+      border: 1px solid rgba(5, 150, 105, 0.1);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .calc-instruction {
+      color: var(--gray-dark);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-label {
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--slate-accent);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-input, .form-select {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(16, 185, 129, 0.15);
+      font-size: 0.9rem;
+      font-family: var(--font-sans);
+      transition: all 0.2s ease;
+      background-color: var(--gray-light);
+    }
+
+    .form-input:focus, .form-select:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: var(--white);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    .calc-results-panel {
+      background-color: var(--white);
+      border-radius: var(--border-radius-lg);
+      padding: 2.5rem;
+      border: 1px solid rgba(5, 150, 105, 0.15);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .calc-results-panel.low-impact {
+      background: radial-gradient(circle at top right, rgba(5, 150, 105, 0.08), transparent);
+      border-top: 6px solid var(--primary);
+    }
+
+    .calc-results-panel.medium-impact {
+      background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.08), transparent);
+      border-top: 6px solid #f59e0b;
+    }
+
+    .calc-results-panel.high-impact {
+      background: radial-gradient(circle at top right, rgba(239, 68, 68, 0.08), transparent);
+      border-top: 6px solid #ef4444;
+    }
+
+    .calc-empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      color: var(--gray-dark);
+    }
+
+    .calc-score-display {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+
+    .impact-badge {
+      display: inline-block;
+      padding: 0.5rem 1.25rem;
+      border-radius: 2rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      margin-bottom: 1.25rem;
+      text-transform: uppercase;
+      font-family: var(--font-display);
+      letter-spacing: 0.05em;
+    }
+
+    .impact-badge.low {
+      background-color: var(--primary-light);
+      color: var(--primary-hover);
+      border: 1px solid rgba(5, 150, 105, 0.2);
+    }
+
+    .impact-badge.medium {
+      background-color: #fef3c7;
+      color: #b45309;
+      border: 1px solid rgba(180, 83, 9, 0.2);
+    }
+
+    .impact-badge.high {
+      background-color: #fee2e2;
+      color: #b91c1c;
+      border: 1px solid rgba(185, 28, 28, 0.2);
+    }
+
+    .calc-score {
+      font-family: var(--font-display);
+      font-size: 4.5rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+      color: var(--slate-accent);
+    }
+
+    .calc-score-unit {
+      font-size: 0.8rem;
+      color: var(--gray-dark);
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .calc-explanation {
+      font-size: 0.9rem;
+      color: var(--gray-dark);
+      max-width: 320px;
+      margin-bottom: 1.5rem;
+    }
+
+    .calc-recommendations {
+      border-top: 1px dashed rgba(5, 150, 105, 0.2);
+      width: 100%;
+      padding-top: 1.5rem;
+      text-align: left;
+    }
+
+    .calc-rec-title {
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      color: var(--gray-dark);
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .calc-rec-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .calc-rec-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--slate-accent);
+      line-height: 1.4;
+    }
+
+    /* AI Chat Assistant Section */
+    #assistant-section {
+      background-color: var(--white);
+    }
+
+    .assistant-layout {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+
+    .chat-container {
+      background-color: var(--light);
+      border-radius: var(--border-radius-lg);
+      border: 1px solid rgba(5, 150, 105, 0.15);
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      height: 540px;
+    }
+
+    .chat-header {
+      background-color: var(--white);
+      color: var(--slate-accent);
+      padding: 1.25rem 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(5, 150, 105, 0.1);
+    }
+
+    .bot-profile {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .bot-avatar {
+      font-size: 1.5rem;
+      background-color: var(--primary-light);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0.75rem;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.15);
+    }
+
+    .bot-info h3 {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .bot-info p {
+      font-size: 0.7rem;
+      color: var(--primary);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .bot-status {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.7rem;
+      font-family: var(--font-mono);
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 8px var(--primary);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 1; }
+    }
+
+    .chat-messages {
+      flex-grow: 1;
+      padding: 1.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .message-bubble {
+      max-width: 80%;
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--border-radius);
+      font-size: 0.9rem;
+      line-height: 1.5;
+      animation: message-fade 0.25s ease-out forwards;
+    }
+
+    @keyframes message-fade {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message-bubble.assistant {
+      background-color: var(--white);
+      color: var(--slate-accent);
+      align-self: flex-start;
+      border-top-left-radius: 0.25rem;
+      border: 1px solid rgba(5, 150, 105, 0.1);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .message-bubble.user {
+      background-color: var(--primary);
+      color: var(--white);
+      align-self: flex-end;
+      border-top-right-radius: 0.25rem;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.15);
+    }
+
+    /* Formatting inside chat bubbles */
+    .message-bubble.assistant ul, .message-bubble.assistant ol {
+      margin-left: 1.25rem;
+      margin-top: 0.4rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .message-bubble.assistant li {
+      margin-bottom: 0.25rem;
+    }
+
+    .message-bubble.assistant p {
+      margin-bottom: 0.4rem;
+    }
+
+    .message-bubble.assistant p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Typist indicator */
+    .chat-bubble-typing {
+      display: none;
+      align-self: flex-start;
+      background-color: var(--white);
+      border: 1px solid rgba(5, 150, 105, 0.1);
+      border-radius: var(--border-radius);
+      border-top-left-radius: 0.25rem;
+      padding: 0.85rem 1.25rem;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .typing-dots {
+      display: flex;
+      gap: 0.35rem;
+      align-items: center;
+      height: 12px;
+    }
+
+    .typing-dot {
+      width: 6px;
+      height: 6px;
+      background-color: var(--gray-medium);
+      border-radius: 50%;
+      animation: typing-wave 1.2s infinite ease-in-out;
+    }
+
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes typing-wave {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-4px); }
+    }
+
+    /* Chat Suggested Queries */
+    .chat-suggestions {
+      padding: 0.75rem 1.5rem;
+      background-color: #f1f5f3;
+      border-top: 1px solid rgba(5, 150, 105, 0.1);
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .suggestion-btn {
+      background-color: var(--white);
+      border: 1px solid rgba(5, 150, 105, 0.15);
+      color: var(--primary);
+      padding: 0.4rem 0.85rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      transition: all 0.2s ease;
+    }
+
+    .suggestion-btn:hover {
+      background-color: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+    }
+
+    /* Chat Input Form */
+    .chat-form {
+      display: flex;
+      padding: 1rem 1.5rem;
+      background-color: var(--white);
+      border-top: 1px solid rgba(5, 150, 105, 0.1);
+      gap: 0.75rem;
+    }
+
+    .chat-input {
+      flex-grow: 1;
+      padding: 0.85rem 1.25rem;
+      border-radius: var(--border-radius);
+      border: 1px solid rgba(5, 150, 105, 0.15);
+      font-size: 0.9rem;
+      font-family: var(--font-sans);
+      background-color: var(--light);
+      transition: all 0.2s ease;
+    }
+
+    .chat-input:focus {
+      outline: none;
+      border-color: var(--primary);
+      background-color: var(--white);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.1);
+    }
+
+    .chat-send-btn {
+      background-color: var(--primary);
+      color: var(--white);
+      border: none;
+      width: 50px;
+      height: 48px;
+      border-radius: var(--border-radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.1rem;
+      transition: background-color 0.2s ease;
+    }
+
+    .chat-send-btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Climate Awareness (SDG 13) Section */
+    #awareness-section {
+      background-color: var(--light);
+    }
+
+    .awareness-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .awareness-card {
+      background-color: var(--white);
+      border: 1px solid rgba(5, 150, 105, 0.1);
+      border-radius: var(--border-radius-lg);
+      padding: 2.25rem;
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .awareness-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(5, 150, 105, 0.2);
+      box-shadow: 0 10px 30px rgba(5, 150, 105, 0.05);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      width: 52px;
+      height: 52px;
+      background-color: var(--primary-light);
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.1);
+    }
+
+    .awareness-card h3 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--slate-accent);
+    }
+
+    .awareness-card p {
+      color: var(--gray-dark);
+      font-size: 0.9rem;
+    }
+
+    /* Special Highlight Box for SDG 13 */
+    .sdg13-highlight-box {
+      background: linear-gradient(135deg, #059669 0%, #0f766e 100%);
+      color: var(--white);
+      border-radius: var(--border-radius-lg);
+      padding: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 3rem;
+      box-shadow: 0 20px 40px rgba(5, 150, 105, 0.15);
+    }
+
+    .sdg13-stamp {
+      font-family: var(--font-display);
+      font-size: 4rem;
+      font-weight: 800;
+      opacity: 0.95;
+      text-align: center;
+      line-height: 1;
+      padding: 1.5rem;
+      border: 4px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      min-width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      background-color: rgba(255,255,255,0.15);
+    }
+
+    .sdg13-info h3 {
+      font-family: var(--font-display);
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+
+    .sdg13-info p {
+      font-size: 1rem;
+      opacity: 0.9;
+      margin-bottom: 1.5rem;
+      line-height: 1.5;
+    }
+
+    .sdg-goals-bullets {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .sdg-bullet {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    /* Footer Styles - Dark Moss */
+    footer {
+      background-color: #0a2318;
+      color: var(--white);
+      padding: 4rem 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-desc {
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+      color: #9cd3be;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      list-style: none;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-links a {
+      color: var(--primary-light);
+      text-decoration: none;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+      transition: color 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-copy {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.4);
+      font-family: var(--font-mono);
+      text-align: center;
+    }
+
+    /* Mobile Responsive Adjustments */
+    @media (max-width: 968px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+
+      .hero-content h1 {
+        font-size: 2.75rem;
+      }
+
+      .hero-subtitle {
+        justify-content: center;
+      }
+
+      .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .hero-illustration {
+        order: -1;
+      }
+
+      .calculator-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .sdg13-highlight-box {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        padding: 2rem;
+      }
+
+      .sdg-goals-bullets {
+        grid-template-columns: 1fr;
+        text-align: left;
+      }
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 0 1rem;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 4.5rem;
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        border-bottom: 1px solid var(--gray-light);
+        padding: 1.5rem;
+        gap: 1rem;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .section-badge {
+        font-size: 0.65rem;
+      }
+
+      .section-title {
+        font-size: 1.75rem;
+      }
+
+      .calc-card, .calc-results-panel {
+        padding: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header / Navigation -->
+  <header>
+    <div class="container nav-container">
+      <a href="#home-section" class="logo">
+        <div class="logo-box">🌱</div>
+        <div class="logo-text-wrapper">
+          <span class="logo-text">EcoSmart AI</span>
+          <span class="logo-subtext">SDG 13 Campaign</span>
+        </div>
+      </a>
+      
+      <div class="nav-wrapper">
+        <ul class="nav-links" id="navigation-menu">
+          <li><a href="#home-section" class="active">Home</a></li>
+          <li><a href="#tips-section">Eco Tips</a></li>
+          <li><a href="#calculator-section">Footprint</a></li>
+          <li><a href="#assistant-section">AI Assistant</a></li>
+          <li><a href="#awareness-section">SDG 13</a></li>
+        </ul>
+        
+        <!-- Premium Live Status marker -->
+        <div class="header-status">
+          <div class="status-dot"></div>
+          <span class="status-text">AI ASSISTANT ONLINE</span>
+        </div>
+        
+        <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle navigation menu">
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 🌍 Home Section -->
+  <section id="home-section">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <div class="hero-subtitle">
+          <span>🌱</span> EcoSmart Climate Companion
+        </div>
+        <h1>Act Smart with <span>EcoSmart AI</span></h1>
+        <p class="hero-desc">
+          Your friendly advisor to fight climate change. Together, let's learn how everyday actions build sustainable paths under UN SDG 13 (Climate Action).
+        </p>
+        <div class="hero-actions">
+          <a href="#calculator-section" class="btn btn-primary" id="cta-calc-btn">
+            Calculate Footprint ⚡
+          </a>
+          <a href="#tips-section" class="btn btn-secondary" id="cta-tips-btn">
+            Get Eco Tips 🌱
+          </a>
+        </div>
+      </div>
+      <div class="hero-illustration">
+        <div class="hero-blob"></div>
+        <div class="hero-card-container">
+          <div class="hero-emoji-icon">🌍</div>
+          <div>
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem;">Climate Emergency</h3>
+            <p style="font-size: 0.9rem; color: var(--gray-dark); margin-top: 0.25rem;">We must limit global warming to 1.5°C to avoid irreversible changes.</p>
+          </div>
+          <div class="hero-card-stat">
+            <h4>SDG 13</h4>
+            <p>Target Goal: Climate Action</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 🌱 AI Eco Tips Generator -->
+  <section id="tips-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Eco Intelligence</span>
+        <h2 class="section-title">AI Eco Tips Generator</h2>
+        <p class="section-subtitle">
+          Instantly generate practical, actionable steps tailored to reduce your carbon footprint across travel, food, waste, and homes.
+        </p>
+      </div>
+
+      <div class="tips-layout">
+        <div class="tips-control" id="tips-box">
+          <p class="tips-prompt-text">
+            Click the button below to query our AI simulation and build customized eco-friendly recommendations.
+          </p>
+          <button class="btn btn-primary tips-btn" id="generate-tips-btn">
+            Generate Eco Tips 🌱
+          </button>
+        </div>
+
+        <div class="tips-results" id="tips-results-container">
+          <div class="tips-placeholder-card" id="tips-default-placeholder">
+            <span style="font-size: 3rem;">💭</span>
+            <p style="font-weight: 500;">No tips generated yet.</p>
+            <p style="font-size: 0.9rem; color: var(--gray-medium);">Click "Generate Eco Tips" to view customized recommendations.</p>
+          </div>
+          
+          <div class="loading-spinner" id="tips-spinner"></div>
+          
+          <!-- Loaded tips will inject here dynamically -->
+          <div id="tips-list-root" style="display: none; width: 100%; flex-direction: column; gap: 1.25rem;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 🧮 Carbon Footprint Calculator -->
+  <section id="calculator-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Carbon Metrics</span>
+        <h2 class="section-title">Carbon Footprint Calculator</h2>
+        <p class="section-subtitle">
+          See how your daily transport, housing power, and waste level translate to an ecological score.
+        </p>
+      </div>
+
+      <div class="calculator-layout">
+        <form class="calc-card" id="footprint-form" onsubmit="return false;">
+          <h3 style="font-family: var(--font-display); font-size: 1.25rem; font-weight: 600;">Determine Your Impact</h3>
+          <p class="calc-instruction">Enter estimates representing standard days to compute your emissions rating instantly.</p>
+
+          <div class="form-group">
+            <label class="form-label" for="input-travel">
+              🚗 Daily Travel Distance (km)
+            </label>
+            <input 
+              type="number" 
+              class="form-input" 
+              id="input-travel" 
+              min="0" 
+              max="500" 
+              placeholder="e.g. 15" 
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-electricity">
+              ⚡ Electricity Device Active Hours
+            </label>
+            <input 
+              type="number" 
+              class="form-input" 
+              id="input-electricity" 
+              min="0" 
+              max="24" 
+              placeholder="e.g. 8" 
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="input-waste">
+              🗑️ Daily Waste Level Profile
+            </label>
+            <select class="form-select" id="input-waste" required>
+              <option value="" disabled selected>Select waste tier...</option>
+              <option value="low">Low (Compost, Recycle most, Minimal trash) ♻️</option>
+              <option value="medium">Medium (Standard bins, Some organic dump) 📦</option>
+              <option value="high">High (High packaging, food trash, zero compost) 🗑️</option>
+            </select>
+          </div>
+
+          <button class="btn btn-primary" id="calculate-btn" style="width: 100%;">
+            Calculate Carbon Impact 📊
+          </button>
+        </form>
+
+        <div class="calc-results-panel" id="calculator-result-card">
+          <!-- Empty State -->
+          <div class="calc-empty-state" id="calc-result-empty">
+            <span style="font-size: 4rem;">📊</span>
+            <h3 style="font-family: var(--font-display); font-size: 1.25rem;">Results Engine</h3>
+            <p style="font-size: 0.9rem; color: var(--gray-dark); max-width: 250px;">
+              Input measurements on the left to reveal your emissions rating scale.
+            </p>
+          </div>
+
+          <!-- Dynamic score panel -->
+          <div class="calc-score-display" id="calc-result-display">
+            <div class="impact-badge" id="calc-badge">Low Impact 🌱</div>
+            <div class="calc-score" id="calc-score-num">0.0</div>
+            <div class="calc-score-unit">kg CO₂ equivalent per day</div>
+            
+            <p class="calc-explanation" id="calc-explanation-text">
+              Your average daily carbon emission is minimal. Keep up the high standard of conservation!
+            </p>
+
+            <div class="calc-recommendations">
+              <h4 class="calc-rec-title">Eco Action Recommendations:</h4>
+              <ul class="calc-rec-list" id="calc-rec-container">
+                <!-- Javascript will render specific suggestions here -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 🤖 AI Chat Assistant -->
+  <section id="assistant-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Eco Chatbot</span>
+        <h2 class="section-title">EcoSmart Assistant</h2>
+        <p class="section-subtitle">
+          Curated climate assistance. Ask questions regarding conservation, local tips, and UN SDG goals.
+        </p>
+      </div>
+
+      <div class="assistant-layout">
+        <div class="chat-container">
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="bot-profile">
+              <div class="bot-avatar">🤖</div>
+              <div class="bot-info">
+                <h3>EcoSmart AI</h3>
+                <p>Climate & Energy Companion</p>
+              </div>
+            </div>
+            <div class="bot-status">
+              <span class="status-dot"></span> Active
+            </div>
+          </div>
+
+          <!-- Chat Messages Scroll Container -->
+          <div class="chat-messages" id="chat-messages-box">
+            <!-- Initial welcome message from bot -->
+            <div class="message-bubble assistant">
+              <p>Hello! I am your <strong>EcoSmart AI Climate Companion</strong>. 🌍</p>
+              <p>I can help you build environmental habits. Ask me queries such as:</p>
+              <ul>
+                <li>"How to save environment?"</li>
+                <li>"How to reduce pollution?"</li>
+                <li>"How to save electricity?"</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Typing indicator container -->
+          <div class="chat-bubble-typing" id="chat-typing-indicator">
+            <div class="typing-dots">
+              <div class="typing-dot"></div>
+              <div class="typing-dot"></div>
+              <div class="typing-dot"></div>
+            </div>
+          </div>
+
+          <!-- Suggested quick questions chips -->
+          <div class="chat-suggestions">
+            <button class="suggestion-btn" data-query="How to save environment?">🌱 Save Environment</button>
+            <button class="suggestion-btn" data-query="Reduce pollution">🗑️ Reduce Pollution</button>
+            <button class="suggestion-btn" data-query="Save electricity">⚡ Save Electricity</button>
+            <button class="suggestion-btn" data-query="What is SDG 13?">🇺🇳 SDG 13 Info</button>
+          </div>
+
+          <!-- Chat Entry Form -->
+          <form class="chat-form" id="chat-entry-form" onsubmit="return false;">
+            <input 
+              type="text" 
+              class="chat-input" 
+              id="chat-user-input" 
+              placeholder="Ask me anything... (e.g. 'How to protect climate?')"
+              required
+            />
+            <button type="submit" class="chat-send-btn" id="chat-send-trigger" aria-label="Send message">
+              ➤
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- 📊 Climate Awareness Section -->
+  <section id="awareness-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">Climate Science</span>
+        <h2 class="section-title">Climate Awareness & Education</h2>
+        <p class="section-subtitle">
+          Knowledge is the first pillar of response. Understand the fundamentals behind global warming and our combined international efforts.
+        </p>
+      </div>
+
+      <div class="awareness-grid">
+        <!-- Card 1 -->
+        <div class="awareness-card">
+          <div class="card-icon">🔥</div>
+          <h3>What is Climate Change?</h3>
+          <p>
+            Climate change refers to long-term shifts in temperatures and weather patterns. Since the 1800s, human industrial activities have been the primary driver of climate change, mainly due to burning fossil fuels like coal, oil, and gas, releasing heat-trapping greenhouse gases.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="awareness-card">
+          <div class="card-icon">🚨</div>
+          <h3>Why It Matters</h3>
+          <p>
+            Rising global temperatures lead to severe droughts, water scarcity, catastrophic wildfires, rising sea levels, flooding, melting polar ice, catastrophic storms, and declining biodiversity. This threatens agricultural food chains and human habitats worldwide.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="awareness-card">
+          <div class="card-icon">♻️</div>
+          <h3>The Solution Strategy</h3>
+          <p>
+            Combating climate change requires shifting power generation to renewable energies (like wind and solar), adopting electric mass public transit, implementing circular economy practices to remove solid waste landfill build-ups, and protecting and expanding green forests.
+          </p>
+        </div>
+      </div>
+
+      <!-- SDG Highlight Box -->
+      <div class="sdg13-highlight-box">
+        <div class="sdg13-stamp">
+          13
+        </div>
+        <div class="sdg13-info">
+          <h3>Sustainable Development Goal 13: Climate Action</h3>
+          <p>
+            Formulated by the United Nations, Goal 13 calls on countries globally to strengthen adaptive resilience to natural climate hazards, integrate climate strategies directly into national policies, and dramatically improve institutional education, human capacities, and early warnings.
+          </p>
+          <div class="sdg-goals-bullets">
+            <div class="sdg-bullet"><span>🌱</span> Carbon neutrality targets by the year 2050</div>
+            <div class="sdg-bullet"><span>⚡</span> Shift from fossil fuels to clean renewable paths</div>
+            <div class="sdg-bullet"><span>💧</span> Efficient conservation of oceans and reserves</div>
+            <div class="sdg-bullet"><span>🎓</span> Global educational empowerment on climate</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <a href="#home-section" class="logo" style="justify-content: center; color: var(--white); margin-bottom: 0.5rem;">
+        <span>🌱</span> EcoSmart AI
+      </a>
+      <p class="footer-desc">
+        Empowering everyday sustainable climate action. Supporting UN SDG 13 for a healthier, cooler, greener planet.
+      </p>
+      <ul class="footer-links">
+        <li><a href="#home-section">Home</a></li>
+        <li><a href="#tips-section">Eco Tips</a></li>
+        <li><a href="#calculator-section">Footprint Calculator</a></li>
+        <li><a href="#assistant-section">AI Assistant</a></li>
+        <li><a href="#awareness-section">SDG 13 Awareness</a></li>
+      </ul>
+      <p class="footer-copy">
+        &copy; 2026 EcoSmart AI. Created directly for global Climate Action and conscious ecosystems. 🌱
+      </p>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Logic -->
+  <script>
+    // --- Mobile Navigation Menu Toggle ---
+    const mobileToggle = document.getElementById('mobile-toggle');
+    const navMenu = document.getElementById('navigation-menu');
+
+    mobileToggle.addEventListener('click', () => {
+      navMenu.classList.toggle('active');
+    });
+
+    // Close mobile menu when links are clicked
+    const navLinksList = document.querySelectorAll('.nav-links a');
+    navLinksList.forEach(link => {
+      link.addEventListener('click', () => {
+        navMenu.classList.remove('active');
+      });
+    });
+
+
+    // --- AI Eco Tips Generator Logic ---
+    const generateTipsBtn = document.getElementById('generate-tips-btn');
+    const tipsDefaultPlaceholder = document.getElementById('tips-default-placeholder');
+    const tipsSpinner = document.getElementById('tips-spinner');
+    const tipsListRoot = document.getElementById('tips-list-root');
+
+    // Robust static database of eco-friendly tips to simulate dynamic generation
+    const ECO_TIPS_DATABASE = {
+      energy: [
+        {
+          title: "Install smart occupancy sensors",
+          desc: "Reduce unnecessary luxury light draws. Smart occupancy sensors automatically shut off lights in empty corridors or rooms, cutting lighting overheads by up to 30%.",
+          icon: "💡"
+        },
+        {
+          title: "Optimize AC settings systematically",
+          desc: "Adjust thermostat targets. Set your air conditioning to 25°C in summer. Scaling settings up by just 1°C conserves nearly 6-10% of standard household unit power draw.",
+          icon: "🌡️"
+        },
+        {
+          title: "Transition to 100% LED fixtures",
+          desc: "Replace existing incandescent energy draws. LED lamps consume up to 80% less wattage than traditional hot bulbs while delivering longer life spans.",
+          icon: "⚡"
+        },
+        {
+          title: "Utilize smart power strips",
+          desc: "Halt standby 'vampire' energy loss by cutting active grid connection to computer zones, television consoles, and major chargers when not in use.",
+          icon: "🔌"
+        }
+      ],
+      waste: [
+        {
+          title: "Establish systematic backyard composting",
+          desc: "Divert kitchen food waste from anaerobic landfills. Composting captures rich nutrient assets and dramatically reduces methane emissions from decomposition.",
+          icon: "🍎"
+        },
+        {
+          title: "Transition fully to reusable steel bottles",
+          desc: "Eliminate downstream plastic loads permanently. Bringing solid personal flasks avoids bottled-beverage packages and reduces plastic mass.",
+          icon: "🥤"
+        },
+        {
+          title: "Refuse excess shipping box packaging",
+          desc: "Choose aggregated product shipping methods. Buying dry goods in bulk sizes minimizes unnecessary cardboard boxes and plastic shrink-wraps.",
+          icon: "📦"
+        },
+        {
+          title: "Adopt paperless billing and receipts",
+          desc: "Go fully digital. Decline paper receipts at shops and switch your bank and utilities to digital emails to preserve tree ecosystems.",
+          icon: "📄"
+        }
+      ],
+      travel: [
+        {
+          title: "Incorporate active walking cycles",
+          desc: "For local excursions under 2 km, skip starting petroleum engines. Walk or use a manual bicycle to achieve 0g transport emissions.",
+          icon: "🚲"
+        },
+        {
+          title: "Utilize reliable local public transit",
+          desc: "Trains and municipal buses distribute fossil fuel footprints across high occupant counts, slashing individual traveler emissions ratios.",
+          icon: "🚌"
+        },
+        {
+          title: "Practice smooth-acceleration hybrid driving",
+          desc: "Avoid jerky starts or excessive highway speeding. Solid cruise-control habits improve engine utility metrics and reduce combustion rates by up to 15%.",
+          icon: "🚗"
+        },
+        {
+          title: "Adopt carpooling with colleagues",
+          desc: "Coordinating standard commutes with neighborhood peers eliminates duplicate car paths, significantly thinning rush hour traffic pollution.",
+          icon: "👥"
+        }
+      ]
+    };
+
+    function getRandomTips() {
+      // Pick random entries from each pool
+      const randomEnergy = ECO_TIPS_DATABASE.energy[Math.floor(Math.random() * ECO_TIPS_DATABASE.energy.length)];
+      const randomWaste = ECO_TIPS_DATABASE.waste[Math.floor(Math.random() * ECO_TIPS_DATABASE.waste.length)];
+      const randomTravel = ECO_TIPS_DATABASE.travel[Math.floor(Math.random() * ECO_TIPS_DATABASE.travel.length)];
+      
+      // Let's add one extra random wild card to hit 4 total tips
+      const allCategories = ['energy', 'waste', 'travel'];
+      const wildCategory = allCategories[Math.floor(Math.random() * allCategories.length)];
+      let wildTip = ECO_TIPS_DATABASE[wildCategory][Math.floor(Math.random() * ECO_TIPS_DATABASE[wildCategory].length)];
+      
+      // Ensure wild tip has fallback or uniqueness
+      if (wildTip.title === randomEnergy.title || wildTip.title === randomWaste.title || wildTip.title === randomTravel.title) {
+        // Just take the next index as a safe fallback
+        const wildIndex = (ECO_TIPS_DATABASE[wildCategory].indexOf(wildTip) + 1) % ECO_TIPS_DATABASE[wildCategory].length;
+        wildTip = ECO_TIPS_DATABASE[wildCategory][wildIndex];
+      }
+
+      return [
+        { ...randomEnergy, category: "Energy Saving" },
+        { ...randomWaste, category: "Waste Reduction" },
+        { ...randomTravel, category: "Sustainable Travel" },
+        { ...wildTip, category: wildCategory === "energy" ? "Energy Saving" : wildCategory === "waste" ? "Waste Reduction" : "Sustainable Travel" }
+      ];
+    }
+
+    generateTipsBtn.addEventListener('click', () => {
+      // Show loading sequence to simulate "AI processing"
+      tipsDefaultPlaceholder.style.display = "none";
+      tipsListRoot.style.display = "none";
+      tipsSpinner.style.display = "block";
+      generateTipsBtn.disabled = true;
+      generateTipsBtn.textContent = "AI Consulting...";
+
+      setTimeout(() => {
+        tipsSpinner.style.display = "none";
+        generateTipsBtn.disabled = false;
+        generateTipsBtn.innerHTML = "Generate Eco Tips 🌱";
+
+        const curatedTips = getRandomTips();
+        
+        // Blank out current list
+        tipsListRoot.innerHTML = "";
+
+        curatedTips.forEach(tip => {
+          const card = document.createElement('div');
+          card.className = "tip-card";
+          
+          card.innerHTML = `
+            <div class="tip-icon">${tip.icon}</div>
+            <div>
+              <span class="tip-category">${tip.category}</span>
+              <h3 class="tip-title">${tip.title}</h3>
+              <p class="tip-desc">${tip.desc}</p>
+            </div>
+          `;
+          
+          tipsListRoot.appendChild(card);
+        });
+
+        tipsListRoot.style.display = "flex";
+      }, 750); // Sleek loading time
+    });
+
+
+    // --- Carbon Footprint Calculator Logic ---
+    const footprintForm = document.getElementById('footprint-form');
+    const inputTravel = document.getElementById('input-travel');
+    const inputElectricity = document.getElementById('input-electricity');
+    const inputWaste = document.getElementById('input-waste');
+    
+    const resultCard = document.getElementById('calculator-result-card');
+    const resultEmpty = document.getElementById('calc-result-empty');
+    const resultDisplay = document.getElementById('calc-result-display');
+    const badgeElement = document.getElementById('calc-badge');
+    const scoreNumElement = document.getElementById('calc-score-num');
+    const explanationElement = document.getElementById('calc-explanation-text');
+    const recContainer = document.getElementById('calc-rec-container');
+
+    footprintForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const travelValue = parseFloat(inputTravel.value);
+      const electricityValue = parseFloat(inputElectricity.value);
+      const wasteValue = inputWaste.value;
+
+      if (isNaN(travelValue) || isNaN(electricityValue) || !wasteValue) {
+        return;
+      }
+
+      // Math Emission Calculation algorithm:
+      // Travel: roughly 0.18 kg CO2 per km (typical standard petrol car emissions divided by occupancy)
+      const travelEmissions = travelValue * 0.18;
+      
+      // Electricity: roughly 0.35 kg CO2 per active appliance-hour (taking median regional grid profiles into consideration)
+      const electricityEmissions = electricityValue * 0.35;
+      
+      // Waste: static value rating representing standard daily waste weights
+      let wasteEmissions = 1.2; // Low standard
+      if (wasteValue === 'medium') {
+        wasteEmissions = 3.5;
+      } else if (wasteValue === 'high') {
+        wasteEmissions = 6.8;
+      }
+
+      // Combine weights
+      const totalDailyCO2 = travelEmissions + electricityEmissions + wasteEmissions;
+      const roundedScore = totalDailyCO2.toFixed(1);
+
+      // Reset Result panel layouts
+      resultEmpty.style.display = "none";
+      resultDisplay.style.display = "flex";
+      
+      // Clear panel outcome styles
+      resultCard.classList.remove('low-impact', 'medium-impact', 'high-impact');
+      badgeElement.className = "impact-badge";
+
+      // Set score values
+      scoreNumElement.textContent = roundedScore;
+
+      let impactTier = "";
+      let recommendations = [];
+
+      // Determine classification thresholds
+      if (totalDailyCO2 < 5.0) {
+        impactTier = "low";
+        resultCard.classList.add('low-impact');
+        badgeElement.classList.add('low');
+        badgeElement.innerHTML = "Low Impact 🌱";
+        explanationElement.textContent = "Outstanding progress! Your daily habits lead to greenhouse gas outputs well below standard thresholds. Continue sharing your actions!";
+        
+        recommendations = [
+          "Organize dynamic environmental study meetups with local peers.",
+          "Expand active organic micro-farming or plant regional flowers in balconies.",
+          "Inspire family members to measure footprints and adapt structural offsets."
+        ];
+      } else if (totalDailyCO2 >= 5.0 && totalDailyCO2 <= 15.0) {
+        impactTier = "medium";
+        resultCard.classList.add('medium-impact');
+        badgeElement.classList.add('medium');
+        badgeElement.innerHTML = "Medium Impact ⚠️";
+        explanationElement.textContent = "Your habits are near typical average indexes. With a few optimized choices, you can easily shift into the low-emissions spectrum.";
+        
+        recommendations = [
+          "Swap key light sockets with premium solid LEDs.",
+          "Dedicating two days per week to cycle, walk, or share commutes.",
+          "Introduce smart power strips to isolate vampire power drawers."
+        ];
+      } else {
+        impactTier = "high";
+        resultCard.classList.add('high-impact');
+        badgeElement.classList.add('high');
+        badgeElement.innerHTML = "High Impact 🚨";
+        explanationElement.textContent = "Your score exceeds the sustainable carbon boundary limit per day. Let's make immediate, smart adjustments to save the climate!";
+        
+        recommendations = [
+          "Integrate public transport lines for core daily transit needs.",
+          "Launch consistent kitchen composting to divert organic waste heaps.",
+          "Unplug idle heavy heating/cooling devices and smart adapters."
+        ];
+      }
+
+      // Add contextual transport/power recommendations
+      if (travelValue > 40 && impactTier !== "low") {
+        recommendations.unshift("Transition longer standard solo drives into mass transit or shared carpool networks.");
+      }
+      if (electricityValue > 12 && impactTier !== "low") {
+        recommendations.unshift("Shut down high-wattage computing screens and utilize power-saving device settings.");
+      }
+
+      // Build target recommendations
+      recContainer.innerHTML = "";
+      recommendations.slice(0, 3).forEach(rec => {
+        const li = document.createElement('li');
+        li.className = "calc-rec-item";
+        li.innerHTML = `<span>⚡</span><span>${rec}</span>`;
+        recContainer.appendChild(li);
+      });
+    });
+
+
+    // --- AI Chat Assistant Logic ---
+    const chatEntryForm = document.getElementById('chat-entry-form');
+    const chatUserInput = document.getElementById('chat-user-input');
+    const chatMessagesBox = document.getElementById('chat-messages-box');
+    const chatTypingIndicator = document.getElementById('chat-typing-indicator');
+
+    // Bot Pre-set Knowledge Answers
+    const CHAT_RESPONSES = {
+      greetings: [
+        "Hello! Welcome to EcoSmart AI Support. 🌍 How can I help you take climate action today? Ask me about saving electricity, reducing pollution, or general ways to save our environment."
+      ],
+      save_environment: [
+        "Here are core ways to save the environment immediately:<br/>" +
+        "<ul>" +
+        "<li><strong>Conserve Water:</strong> Turn off faucets when brushing teeth and fix leaks.</li>" +
+        "<li><strong>Ditch Single-Use Plastic:</strong> Choose reusable mugs, cloth travel bags, and flasks.</li>" +
+        "<li><strong>Introduce Green Trees:</strong> Establish flower patches and backyards.</li>" +
+        "<li><strong>Support Circular Economy:</strong> Sell, donate, and select recycled items.</li>" +
+        "</ul>"
+      ],
+      pollution: [
+        "To significantly reduce atmospheric and plastic pollution:<br/>" +
+        "<ul>" +
+        "<li><strong>Active Commuting:</strong> Ride bikes, carpool, or travel via public rail/bus.</li>" +
+        "<li><strong>Practice Correct Recycling:</strong> Sort plastic, paper, metal, and glass diligently.</li>" +
+        "<li><strong>Choose Green Brands:</strong> Support biodegradable packaging and sustainable manufacturing.</li>" +
+        "<li><strong>Zero Waste Combustion:</strong> Avoid burning yard wood clumps or plastic heaps.</li>" +
+        "</ul>"
+      ],
+      electricity: [
+        "To slash active household electricity and power footprints:<br/>" +
+        "<ul>" +
+        "<li><strong>Extract Inactive Adapters:</strong> Unplug device chargers to halt backup power draws.</li>" +
+        "<li><strong>Incorporate Energy Star:</strong> Choose heavy hardware with higher efficiency ratings.</li>" +
+        "<li><strong>Leverage Natural Ventilation:</strong> Adjust cooling thermostats and choose natural wind flow.</li>" +
+        "<li><strong>Clean Panels:</strong> Keep solar installations clean to maintain capture efficiency.</li>" +
+        "<li><strong>Clean Solar:</strong> Maintain arrays consistently to build strong net returns.</li>" +
+        "</ul>"
+      ],
+      sdg13: [
+        "UN Sustainable Development Goal 13 (SDG 13 - Climate Action) focuses on global solutions to combat warming:<br/>" +
+        "<ul>" +
+        "<li>Improving general education and administrative capacity on mitigation.</li>" +
+        "<li>Strengthening systemic resistance to nature crises in highly vulnerable nations.</li>" +
+        "<li>Integrating climate-focused policies inside major governmental agendas.</li>" +
+        "</ul>"
+      ],
+      fallback: [
+        "I want to make sure I support you perfectly! While I continue to learn climate sciences, you can ask me directly about:<br/>" +
+        "• <i>'How to save environment?'</i><br/>" +
+        "• <i>'How to reduce pollution?'</i><br/>" +
+        "• <i>'How to save electricity?'</i><br/><br/>" +
+        "Every simple choice we make today shapes our global climate future. Build positive habits! 🌱"
+      ]
+    };
+
+    function appendMessage(text, isUser = false) {
+      const bubble = document.createElement('div');
+      bubble.className = `message-bubble ${isUser ? 'user' : 'assistant'}`;
+      bubble.innerHTML = text;
+      
+      chatMessagesBox.appendChild(bubble);
+      
+      // Keep scroll anchored to bottom
+      chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
+    }
+
+    function processResponse(userRawText) {
+      const text = userRawText.toLowerCase().trim();
+
+      // Typing feedback simulation
+      chatTypingIndicator.style.display = "block";
+      chatMessagesBox.scrollTop = chatMessagesBox.scrollHeight;
+
+      setTimeout(() => {
+        chatTypingIndicator.style.display = "none";
+
+        let responseHTML = "";
+
+        // Keyword analysis engine
+        if (text.includes("hi") || text.includes("hello") || text.includes("hey") || text.includes("greeting")) {
+          responseHTML = CHAT_RESPONSES.greetings[0];
+        } else if (text.includes("save environment") || text.includes("environment") || text.includes("save the environment") || text.includes("save earth") || text.includes("climate action")) {
+          responseHTML = CHAT_RESPONSES.save_environment[0];
+        } else if (text.includes("pollution") || text.includes("reduce pollution") || text.includes("air") || text.includes("plastic")) {
+          responseHTML = CHAT_RESPONSES.pollution[0];
+        } else if (text.includes("electricity") || text.includes("save electricity") || text.includes("energy") || text.includes("power")) {
+          responseHTML = CHAT_RESPONSES.electricity[0];
+        } else if (text.includes("sdg") || text.includes("goal") || text.includes("united nations")) {
+          responseHTML = CHAT_RESPONSES.sdg13[0];
+        } else {
+          responseHTML = CHAT_RESPONSES.fallback[0];
+        }
+
+        appendMessage(responseHTML, false);
+      }, 700);
+    }
+
+    chatEntryForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const text = chatUserInput.value.trim();
+      if (!text) return;
+
+      // Add user message
+      appendMessage(text, true);
+      chatUserInput.value = "";
+
+      // Compute and show AI feedback
+      processResponse(text);
+    });
+
+    // Handle suggestion chip clicks
+    const suggestionBtns = document.querySelectorAll('.suggestion-btn');
+    suggestionBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const query = btn.getAttribute('data-query');
+        appendMessage(query, true);
+        processResponse(query);
+      });
+    });
+  </script>
+</body>
+</html>

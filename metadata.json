@@ -1,0 +1,6 @@
+{
+  "name": "EcoSmart AI",
+  "description": "EcoSmart AI – Climate Action Web App supports SDG 13 (Climate Action) with an AI Eco Tips Generator, Carbon Footprint Calculator, AI Chat Assistant, and Climate Awareness resources.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
